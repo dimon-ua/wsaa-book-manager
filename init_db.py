@@ -22,6 +22,10 @@ books_list = [
 # https://docs.python.org/3/library/sqlite3.html#sqlite3.Cursor.executemany
 con.executemany("INSERT INTO books (title, author, isbn, price) VALUES (?, ?, ?, ?)", books_list)
 
+#check our data in db
+#con.execute("SELECT * FROM books")
+#print(con.fetchall()) # Works!
+
 # commit() method for uploading our db after creating its structure
 db.commit()
 
