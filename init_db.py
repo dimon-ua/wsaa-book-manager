@@ -5,7 +5,7 @@ db=sqlite3.connect('database.db')
 con = db.cursor()
 
 con.execute('''CREATE TABLE IF NOT EXISTS books (
-        id integer AUTO_INCREMENT PRIMARY KEY,
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
         title text,
         author text,
         isbn text,
