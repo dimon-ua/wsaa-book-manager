@@ -1,32 +1,38 @@
-import sqlite3
+import mysql.connector
+from mysql.connector import errorcode
 
-db=sqlite3.connect('database.db')
+# Database configuration
+config = {
+    'user': 'root',
+    'password': '',
+    'host': 'localhost',
+    'database': 'wsaa_db'
+}
 
-con = db.cursor()
+# To handle connection errors, use the try statement and catch all errors using the errors.Error exception:
+# https://dev.mysql.com/doc/connector-python/en/connector-python-example-connecting.html
 
-con.execute('''CREATE TABLE IF NOT EXISTS books (
-        id INTEGER PRIMARY KEY AUTOINCREMENT,
-        title text,
-        author text,
-        isbn text,
-        price REAL
-        )
-        ''')
-
-books_list = [
-    ('The Great Gatsby', 'F. Scott Fitzgerald', '978-0743273565', 12.50),
-    ('To Kill a Mockingbird', 'Harper Lee', '978-0061120084', 10.99),
-    ('1984', 'George Orwell', '978-0451524935', 8.50)
-]
-
-# https://docs.python.org/3/library/sqlite3.html#sqlite3.Cursor.executemany
-con.executemany("INSERT INTO books (title, author, isbn, price) VALUES (?, ?, ?, ?)", books_list)
-
-#check our data in db
-#con.execute("SELECT * FROM books")
-#print(con.fetchall()) # Works!
-
-# commit() method for uploading our db after creating its structure
-db.commit()
-
-db.close()
+try:
+  cnx = mysql.connector.connect(user='root',
+                                database='wsaa_db')
+except mysql.connector.Error as err:
+  if err.errno == errorcode.ER_ACCESS_DENIED_ERROR:
+    print("Something is wrong with your user name or password")
+  elif err.errno == errorcode.ER_BAD_DB_ERROR:
+    print("Database does not exist")
+  else:
+    print(err)
+else:
+    cursor = cnx.cursor()
+    # If no Error occurred, create the books table
+    sql = """
+        CREATE TABLE IF NOT EXISTS books (
+        id INT AUTO_INCREMENT PRIMARY KEY,
+        title VARCHAR(255),
+        author VARCHAR(255),
+        isbn VARCHAR(20),
+        price DECIMAL(10, 2)
+    )"""
+    cursor.execute(sql)
+    cursor.close()
+    cnx.close()
