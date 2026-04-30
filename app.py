@@ -11,6 +11,7 @@ db = mysql.connector.connect(**config)
 
 #------- ROUTES --------
 @app.route("/")
+@app.route("/index")
 def index():
     cursor = db.cursor()
     sql="select * from books"
@@ -19,6 +20,9 @@ def index():
     cursor.close()
     return render_template("index.html", books=result)
 
+@app.route("/auth")
+def auth():
+    return render_template("auth.html")
 
 
 #------- FLASK RUNNING CODE --------
