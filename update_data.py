@@ -4,8 +4,10 @@ from config import config
 db = mysql.connector.connect(**config)
 
 cursor = db.cursor()
-sql="update student set name= %s, age=%s where id = %s"
-values = ("Joe",33, 1)
+
+sql="update books set title= %s, price=%s where id = %s"
+values = ("The Great Gatsby (Special Edition)",15.99, 1)
+
 cursor.execute(sql, values)
 db.commit()
 print("update done")
