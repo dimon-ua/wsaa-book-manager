@@ -1,30 +1,26 @@
-import sqlite3
-from flask import Flask
+from flask import Flask, render_template
+import mysql.connector
+from config import config
 
 
 app = Flask(__name__)
-DATABASE = 'database.db'
+
+# ------- DATABASE CONNECTION (DAO) --------
+db = mysql.connector.connect(**config)
 
 
-# ----- DATA ACCESS (DAO) -----
-
-# https://flask.palletsprojects.com/en/stable/patterns/sqlite3/#using-sqlite-3-with-flask
-def get_db():
-    db = getattr(g, '_database', None)
-    if db is None:
-        db = g._database = sqlite3.connect(DATABASE)
-    return db
-
-
-# ----- FLASK ROUTES -----
-
+#------- ROUTES --------
 @app.route("/")
-def hello_world():
-    return "<p>Hello, World!</p>"
+def index():
+    cursor = db.cursor()
+    sql="select * from books"
+    cursor.execute(sql)
+    result = cursor.fetchall()
+    cursor.close()
+    return render_template("index.html", books=result)
 
 
 
-# ----- FLASK RUN SERVER ------
-
+#------- FLASK RUNNING CODE --------
 if __name__ == "__main__":
     app.run(debug=True)
