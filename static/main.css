@@ -1,0 +1,22 @@
+tbody tr:hover {
+    background-color: #f8f9fa;
+    transition: 0.3s;
+}
+
+
+thead {
+    background-color: #343a40;
+    color: white;
+}
+
+input.form-control {
+    border-radius: 8px;
+    border: 1px solid #ced4da;
+}
+
+.btn-success {
+    transition: transform 0.2s;
+}
+.btn-success:hover {
+    transform: scale(1.05); 
+}
