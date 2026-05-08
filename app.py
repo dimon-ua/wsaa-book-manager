@@ -1,24 +1,19 @@
 from flask import Flask, render_template
+from booksDAO import booksDAO
 import mysql.connector
 from config import config
 
 
 app = Flask(__name__)
 
-# ------- DATABASE CONNECTION (DAO) --------
-db = mysql.connector.connect(**config)
-
 
 #------- ROUTES --------
 @app.route("/")
 @app.route("/index")
 def index():
-    cursor = db.cursor()
-    sql="select * from books"
-    cursor.execute(sql)
-    result = cursor.fetchall()
-    cursor.close()
-    return render_template("index.html", books=result)
+    books = booksDAO.get_all_books()
+    return render_template("index.html", books=books)
+   
 
 @app.route("/auth")
 def auth():
