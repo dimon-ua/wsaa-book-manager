@@ -29,7 +29,21 @@ def get_book_api(id):
     else:
         return jsonify({"error": "Book not found"}), 404
 
+@app.route("/api/books", methods=["POST"])
+def add_book():
+    data = request.get_json()
+    title = data.get("title")
+    author = data.get("author")
+    price = data.get("price")
+    isbn = data.get("isbn")
 
+    if not title or not author or not price or not isbn:
+        return jsonify({"error": "Missing required fields"}), 400
+
+    new_book_id = booksDAO.add_book(title, author, price, isbn)
+    return jsonify({"message": "Book added successfully", "book_id": new_book_id}), 201
+
+    
 #------- FLASK RUNNING CODE --------
 if __name__ == "__main__":
     app.run(debug=True)

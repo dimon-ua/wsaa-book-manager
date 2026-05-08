@@ -33,4 +33,14 @@ class BooksDAO:
         cursor.close()
         db.close()
 
+    def add_book(self, title, author, price, isbn):
+        db = self.get_connection()
+        cursor = db.cursor()
+        cursor.execute("INSERT INTO books (title, author, price, isbn) VALUES (%s, %s, %s, %s)", (title, author, price, isbn))
+        db.commit()
+        new_book_id = cursor.lastrowid
+        cursor.close()
+        db.close()
+        return new_book_id
+
 booksDAO = BooksDAO()
