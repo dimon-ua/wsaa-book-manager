@@ -43,4 +43,13 @@ class BooksDAO:
         db.close()
         return new_book_id
 
+    def get_all_authors(self):
+        db = self.get_connection()
+        cursor = db.cursor(dictionary=True)
+        cursor.execute("SELECT * FROM authors")
+        result = cursor.fetchall()
+        cursor.close()
+        db.close()
+        return result
+
 booksDAO = BooksDAO()

@@ -13,8 +13,9 @@ app = Flask(__name__)
 @app.route("/index")
 def index():
     books = booksDAO.get_all_books()
-    return render_template("index.html", books=books)
-   
+    all_authors = booksDAO.get_all_authors()
+    return render_template("index.html", books=books, all_authors=all_authors)
+
 
 @app.route("/auth")
 def auth():
@@ -43,7 +44,7 @@ def add_book():
     new_book_id = booksDAO.add_book(title, author, price, isbn)
     return jsonify({"message": "Book added successfully", "book_id": new_book_id}), 201
 
-    
+
 #------- FLASK RUNNING CODE --------
 if __name__ == "__main__":
     app.run(debug=True)

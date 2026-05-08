@@ -45,5 +45,15 @@
             </tbody>
         </table>        
     </div>
+
+    <div class="container mt-4">
+    <h4>Our Authors</h4>
+    <ul>
+        {% for author in all_authors %}
+            <li>{{ author.name }} ({{ author.country }})</li>
+        {% endfor %}
+    </ul>
+</div>
+
 </body>
 </html>
