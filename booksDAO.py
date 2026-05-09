@@ -25,7 +25,7 @@ class BooksDAO:
         db.close()
         return book
         
-    def  delete_book(self, book_id):
+    def delete_book(self, book_id):
         db = self.get_connection()
         cursor = db.cursor()
         cursor.execute("DELETE FROM books WHERE id = %s", (book_id,))

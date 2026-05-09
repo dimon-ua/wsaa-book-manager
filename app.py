@@ -44,6 +44,11 @@ def add_book():
     new_book_id = booksDAO.add_book(title, author, price, isbn)
     return jsonify({"message": "Book added successfully", "book_id": new_book_id}), 201
 
+@app.route("/api/books/<int:id>", methods=["DELETE"])
+def delete_book(id):
+    booksDAO.delete_book(id)
+    return jsonify({"message": "Book deleted successfully"}), 200
+
 
 #------- FLASK RUNNING CODE --------
 if __name__ == "__main__":
