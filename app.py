@@ -41,10 +41,10 @@ def add_book():
    
     return redirect("/")
 
-@app.route("/api/books/<int:id>", methods=["DELETE"])
+@app.route("/delete_book/<int:id>")
 def delete_book(id):
     booksDAO.delete_book(id)
-    return redirect(url_for("index", message="Book deleted successfully"))
+    return redirect("/")
 
 
 #------- FLASK RUNNING CODE --------

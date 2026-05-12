@@ -44,8 +44,7 @@
                     <td>{{ book.isbn }}</td>
                     <td>
                              <a href="{{ url_for('delete_book', id=book.id) }}" 
-                             class="btn btn-outline-danger btn-sm" 
-                             onclick="return confirm('Delete?')">Delete</a>
+                             class="btn btn-outline-danger btn-sm">Delete</a>
                     </td>
                 </tr>
                 {% endfor %}
