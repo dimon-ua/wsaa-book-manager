@@ -4,6 +4,7 @@ from config import config
 DATABASE = 'database.db'
 
 class BooksDAO:    
+    
     def get_connection(self):
         return mysql.connector.connect(**config)
         

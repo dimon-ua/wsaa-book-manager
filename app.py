@@ -1,4 +1,4 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, redirect, url_for
 from booksDAO import booksDAO
 import mysql.connector
 from config import config
@@ -30,24 +30,21 @@ def get_book_api(id):
     else:
         return jsonify({"error": "Book not found"}), 404
 
-@app.route("/api/books", methods=["POST"])
+@app.route("/add_book", methods=["POST"])
 def add_book():
-    data = request.get_json()
-    title = data.get("title")
-    author = data.get("author")
-    price = data.get("price")
-    isbn = data.get("isbn")
+    title = request.form.get("title")
+    author = request.form.get("author")
+    price = request.form.get("price")
+    isbn = request.form.get("isbn")
 
-    if not title or not author or not price or not isbn:
-        return jsonify({"error": "Missing required fields"}), 400
-
-    new_book_id = booksDAO.add_book(title, author, price, isbn)
-    return jsonify({"message": "Book added successfully", "book_id": new_book_id}), 201
+    new_book_id = booksDAO.add_book(title, author, price, isbn)   
+   
+    return redirect("/")
 
 @app.route("/api/books/<int:id>", methods=["DELETE"])
 def delete_book(id):
     booksDAO.delete_book(id)
-    return jsonify({"message": "Book deleted successfully"}), 200
+    return redirect(url_for("index", message="Book deleted successfully"))
 
 
 #------- FLASK RUNNING CODE --------
