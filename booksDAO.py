@@ -4,7 +4,7 @@ from config import config
 DATABASE = 'database.db'
 
 class BooksDAO:    
-    
+
     def get_connection(self):
         return mysql.connector.connect(**config)
         
@@ -52,5 +52,13 @@ class BooksDAO:
         cursor.close()
         db.close()
         return result
+
+    def update_book(self, book_id, title, author, price, isbn):
+        db = self.get_connection()
+        cursor = db.cursor()
+        cursor.execute("UPDATE books SET title = %s, author = %s, price = %s, isbn = %s WHERE id = %s", (title, author, price, isbn, book_id))
+        db.commit()
+        cursor.close()
+        db.close()
 
 booksDAO = BooksDAO()

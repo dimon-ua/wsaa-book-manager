@@ -47,6 +47,13 @@ def delete_book(id):
     return redirect("/")
 
 
+@app.route("/edit_book/<int:book_id>")
+def edit_book(book_id):
+    # Fetch the book by ID
+    book = booksDAO.get_book_by_id(book_id)
+    return render_template("edit_book.html", book=book)
+    
+
 #------- FLASK RUNNING CODE --------
 if __name__ == "__main__":
     app.run(debug=True)
