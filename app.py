@@ -7,13 +7,45 @@ import requests
 app = Flask(__name__)
 
 
+# Reference: https://www.geeksforgeeks.org/python/how-to-use-flask-session-in-python-flask/
+                    # Configuration 
+app.config["SESSION_PERMANENT"] = False     # Sessions expire when the browser is closed
+app.config["SESSION_TYPE"] = "filesystem"     # Store session data in files
+# Reference: https://gemini.google.com/share/99748ba0b495
+# we need a secret key to sign the session
+app.secret_key = "my_secret_key"
+
+# Initialize Flask-Session
+Session(app)
+
+
+# Login and Logout section
+# Reference: https://www.geeksforgeeks.org/python/how-to-use-flask-session-in-python-flask/
+@app.route("/login", methods=["GET", "POST"])
+def login():
+    if request.method == "POST":
+        # Record the user name in session
+        username = request.form.get("name")
+        session["name"] = username
+        return redirect("index")
+    return render_template("login.html")
+
+@app.route("/logout")
+def logout():
+    # Clear the username from session
+    session["name"] = None
+    return redirect("/")
+
+
+
 #------- ROUTES --------
 # Reference: Flask routing 
 # https://flask.palletsprojects.com/en/stable/quickstart/#routing
-
 # 'index' root, main page
 @app.route("/") 
 def index():
+    if not session.get("name"):
+        return redirect(url_for("login"))
     books = booksDAO.get_all_books()
     all_authors = booksDAO.get_all_authors()
     return render_template("index.html", books=books, all_authors=all_authors)
