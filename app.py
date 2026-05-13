@@ -109,10 +109,10 @@ def update_book(book_id):
 
 
 # ****************************DELETE***************************
-@app.route("/api/books/<int:book_id>", methods=["DELETE"])
-def delete_book_api(book_id):
+@app.route("/api/books/<int:book_id>", methods=["GET", "POST", "DELETE"])
+def delete_book(book_id):
     booksDAO.delete_book(book_id)
-    return jsonify({"message": "Book deleted successfully"})
+    return redirect(url_for("index"))
 
 
 
