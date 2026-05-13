@@ -35,11 +35,11 @@ A Flask-based web application for managing a book collection with MySQL database
    ```bash
    pip install -r requirements.txt
    ```
-
-   Note: Make sure `mysql-connector-python` is installed:
-   ```bash
-   pip install mysql-connector-python
-   ```
+   
+   > **Important:** The `mysql-connector-python` package is required. If not included automatically, install it separately:
+   > ```bash
+   > pip install mysql-connector-python
+   > ```
 
 3. **Set up MySQL database**:
    - Create a MySQL database named `wsaa_db`
@@ -58,16 +58,34 @@ A Flask-based web application for managing a book collection with MySQL database
 
 2. **Open your browser** and navigate to `http://localhost:5000`
 
-## 🔐 Authentication & Access
-This project implements a session-based authentication system. 
-To access the book management features (Add, Edit, Delete), please use the following credentials:
+3. **Log in** with the following credentials:
+   - **Username:** `Andrew`
+   - **Password:** `Beatty`
+   
+   > The login system is case-insensitive and uses `.capitalize()` for flexible authentication.
 
-- **Username:** `Andrew` 
-- **Password:** `Beatty` 
+4. **Manage books** through the web interface:
+   - View all books with cover images
+   - Add new books via the form
+   - Edit existing books
+   - Delete books via the API
 
-> **Note:** The login system is case-insensitive and uses `.capitalize()` to ensure a smooth login experience.
+## Testing the API
 
-3. **Manage books** through the web interface or API
+The application uses ISBN to fetch book covers automatically from OpenLibrary API. Here are some test books to quickly validate the API:
+
+| Title | ISBN |
+|-------|------|
+| Learning Python | 1565924649 |
+| The Panda's Thumb | 0393300234 |
+| HTML 5 | 9350040956 |
+
+Example API test:
+```bash
+curl -X POST http://localhost:5000/api/books \
+  -H "Content-Type: application/json" \
+  -d '{"title":"Learning Python","author":"Mark Lutz","price":79.99,"isbn":"1565924649"}'
+```
 
 ## API Endpoints
 
@@ -96,6 +114,7 @@ curl -X POST http://localhost:5000/api/books \
 ## Database Schema
 
 ### Books Table
+Stores information about all books in the collection.
 ```sql
 CREATE TABLE books (
     id INT AUTO_INCREMENT PRIMARY KEY,
@@ -107,6 +126,7 @@ CREATE TABLE books (
 ```
 
 ### Authors Table
+Stores author information with their country of origin.
 ```sql
 CREATE TABLE authors (
     id INT AUTO_INCREMENT PRIMARY KEY,
@@ -117,10 +137,11 @@ CREATE TABLE authors (
 
 ## Dependencies
 
-- Flask 3.1.3 - Web framework
-- mysql-connector-python - MySQL database connector
-- Bootstrap 4.1.3 - CSS framework
-- OpenLibrary API - Book cover images
+- **Flask 3.1.3** - Web framework for building the application
+- **mysql-connector-python** - MySQL database connector for Python
+- **Bootstrap 4.1.3** - CSS framework for responsive UI design
+- **OpenLibrary API** - External service for book cover images
+- **Requests** - HTTP library for making API calls
 
 ## References
 
@@ -130,6 +151,8 @@ CREATE TABLE authors (
 - [OpenLibrary Covers API](https://openlibrary.org/dev/docs/api/covers) - Book cover images
 - [Flask Quickstart](https://flask.palletsprojects.com/en/stable/quickstart/) - Routing and app setup
 - [Flask JSON API](https://flask.palletsprojects.com/en/stable/api/#flask.json.jsonify) - JSON response handling
+- [Why Use Secret Keys in Flask Sessions](https://gemini.google.com/app/78bf2aabbd3c04f2) - Session management
+- [Flask Sessions Documentation](https://runestone.academy/ns/books/published/webfundamentals/Flask/sessions.html) - Session implementation
 
 ## Contributing
 
