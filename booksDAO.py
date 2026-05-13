@@ -1,8 +1,6 @@
 import mysql.connector
 from config import config
 
-DATABASE = 'database.db'
-
 class BooksDAO:    
 
     def get_connection(self):
