@@ -58,6 +58,15 @@ A Flask-based web application for managing a book collection with MySQL database
 
 2. **Open your browser** and navigate to `http://localhost:5000`
 
+## 🔐 Authentication & Access
+This project implements a session-based authentication system. 
+To access the book management features (Add, Edit, Delete), please use the following credentials:
+
+- **Username:** `Andrew` 
+- **Password:** `Beatty` 
+
+> **Note:** The login system is case-insensitive and uses `.capitalize()` to ensure a smooth login experience.
+
 3. **Manage books** through the web interface or API
 
 ## API Endpoints

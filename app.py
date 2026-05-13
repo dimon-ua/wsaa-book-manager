@@ -1,6 +1,7 @@
-from flask import Flask, render_template, redirect, url_for, request, jsonify
+from flask import Flask, render_template, redirect, url_for, request, jsonify, session
 from booksDAO import booksDAO
 import requests
+from flask_session import Session
 
 # Reference: Create quick Flask app
 # https://flask.palletsprojects.com/en/2.3.x/quickstart/
@@ -25,16 +26,21 @@ Session(app)
 def login():
     if request.method == "POST":
         # Record the user name in session
-        username = request.form.get("name")
-        session["name"] = username
-        return redirect("index")
+        username = request.form.get("username")
+        password = request.form.get("password")
+
+        if username == "Andrew" and password == "Beatty":
+            session["name"] = username
+            return redirect(url_for("index"))
+        else:
+            return "Invalid login. Hint: Use your Name and Surname. Example: Andrew, Beatty."
     return render_template("login.html")
 
 @app.route("/logout")
 def logout():
     # Clear the username from session
     session["name"] = None
-    return redirect("/")
+    return redirect(url_for("login"))
 
 
 

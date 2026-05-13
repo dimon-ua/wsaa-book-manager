@@ -1,0 +1,29 @@
+<!-- Reference : https://www.w3schools.com/bootstrap5/bootstrap_forms.php-->
+ <!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Login</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+<div class="container mt-3 col-md-4">
+  <h2>Login Form</h2>
+  <form action="/login" method="POST">
+    <div class="mb-3 mt-3">
+      <label for="username" class="form-label">Username:</label>
+      <input type="text" class="form-control" id="username" placeholder="Andrew" name="username" required>
+    </div>
+    <div class="mb-3">
+      <label for="pwd" class="form-label">Password:</label>
+      <input type="password" class="form-control" id="pwd" placeholder="Beatty" name="password" required>
+    </div>
+    <div class="form-check mb-3">
+      <label class="form-check-label">
+        <input class="form-check-input" type="checkbox" name="remember"> Remember me
+      </label>
+    </div>    
+    <button type="submit" class="btn btn-primary">Submit</button>
+  </form>
+</div>
