@@ -2,6 +2,8 @@
 
 A Flask-based web application for managing a book collection with MySQL database integration.
 
+**Live demo:** https://dima86.pythonanywhere.com/
+
 ## Features
 
 - **Book Management**: Add, view, edit, and delete books
