@@ -146,13 +146,19 @@ CREATE TABLE authors (
 ## References
 
 - [Flask Documentation](https://flask.palletsprojects.com/) - Web framework used
-- [MySQL Connector/Python](https://dev.mysql.com/doc/connector-python/en/) - Database connectivity
-- [Bootstrap](https://getbootstrap.com/docs/4.1/) - CSS framework for UI
-- [OpenLibrary Covers API](https://openlibrary.org/dev/docs/api/covers) - Book cover images
 - [Flask Quickstart](https://flask.palletsprojects.com/en/stable/quickstart/) - Routing and app setup
+- [Flask Quickstart - Routing](https://flask.palletsprojects.com/en/stable/quickstart/#routing) - Detailed routing guide
 - [Flask JSON API](https://flask.palletsprojects.com/en/stable/api/#flask.json.jsonify) - JSON response handling
-- [Why Use Secret Keys in Flask Sessions](https://gemini.google.com/app/78bf2aabbd3c04f2) - Session management
+- [Flask Request - get_json()](https://flask.palletsprojects.com/en/stable/api/#flask.Request.get_json) - Parse JSON requests
+- [MySQL Connector/Python](https://dev.mysql.com/doc/connector-python/en/) - Database connectivity
+- [Bootstrap 4 Documentation](https://getbootstrap.com/docs/4.1/) - CSS framework for UI
+- [Bootstrap Tables](https://getbootstrap.com/docs/4.1/content/tables/) - Table styling components
+- [Bootstrap 5 Forms](https://www.w3schools.com/bootstrap5/bootstrap_forms.php) - Form styling and components
+- [OpenLibrary Covers API](https://openlibrary.org/dev/docs/api/covers) - Book cover images
+- [GeeksforGeeks - Flask Session in Python](https://www.geeksforgeeks.org/python/how-to-use-flask-session-in-python-flask/) - Session management guide
+- [Why Use Secret Keys in Flask Sessions](https://gemini.google.com/app/78bf2aabbd3c04f2) - Session security explanation
 - [Flask Sessions Documentation](https://runestone.academy/ns/books/published/webfundamentals/Flask/sessions.html) - Session implementation
+- [Additional Secret Key Reference](https://gemini.google.com/share/99748ba0b495) - Secret key configuration details
 
 ## Contributing
 
