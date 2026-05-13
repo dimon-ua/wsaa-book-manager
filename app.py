@@ -1,5 +1,6 @@
 from flask import Flask, render_template, redirect, url_for, request, jsonify
 from booksDAO import booksDAO
+import requests
 
 # Reference: Create quick Flask app
 # https://flask.palletsprojects.com/en/2.3.x/quickstart/
@@ -77,6 +78,8 @@ def delete_book_api(book_id):
 
 
 
+# Route
+
 @app.route("/api/books/<int:id>", methods=["GET"])
 def get_book_api(id):
     book = booksDAO.get_book_by_id(id)
@@ -85,6 +88,15 @@ def get_book_api(id):
     else:
         return jsonify({"error": "Book not found"}), 404
 
+# Route to add book from HTML form
+@app.route("/add_book", methods=["POST"])
+def add_book():
+    title = request.form.get("title")
+    author = request.form.get("author")
+    price = request.form.get("price")
+    isbn = request.form.get("isbn")
+    booksDAO.add_book(title, author, price, isbn)
+    return redirect("/")
 
 
 @app.route("/edit_book/<int:book_id>")

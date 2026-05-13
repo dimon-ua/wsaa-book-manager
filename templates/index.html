@@ -28,23 +28,27 @@
             <thead class="thead-dark">
                 <tr>
                     <th scope="col">ID</th>
+                    <th scope="col">Cover</th>
                     <th scope="col">Title</th>
                     <th scope="col">Author</th>
                     <th scope="col">Price</th>
                     <th scope="col">ISBN</th>
+                    <th scope="col">Actions</th>
                 </tr>
             </thead>
             <tbody>
                 {% for book in books %}
                  <tr>
-                    <th scope="row">{{ book.id }}</th>
+                    <th scope="row">{{ book.id }}</th><td>
+                        <img src="https://covers.openlibrary.org/b/isbn/{{ book.isbn }}-M.jpg"
+                        width="50" alt="Book Cover" class="img-thumbnail"></td>
+                    
                     <td>{{ book.title }}</td>
                     <td>{{ book.author }}</td>
                     <td>{{ book.price }}</td>
                     <td>{{ book.isbn }}</td>
                     <td>
-                             <a href="{{ url_for('delete_book', id=book.id) }}" 
-                             class="btn btn-outline-danger btn-sm">Delete</a>
+                             
                             <a href="{{ url_for('edit_book', book_id=book.id) }}" 
                                class="btn btn-outline-primary btn-sm">Edit</a>
                             </td>
